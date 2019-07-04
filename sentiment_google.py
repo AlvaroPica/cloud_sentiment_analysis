@@ -58,4 +58,5 @@ if __name__ == '__main__':
     #Save google results
     results_df.to_csv(os.path.join(cwd, 'results//google_sentiment.csv'), index=False)
 
+    print(results_df)
     # Delete your google cloud platform json credentials file from local and on the cloud. This was just for fun.

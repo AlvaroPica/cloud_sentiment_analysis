@@ -32,8 +32,8 @@ if __name__ == '__main__':
     texts_df = pd.read_csv(texts_sample_fpath)
 
     # create amazon client
-    aws_client = run_amazon_client(ACCESS_ID = amazon_credentials['id'],
-                                   ACCESS_KEY = amazon_credentials['secret_key'])
+    aws_client = run_amazon_client(ACCESS_ID = amazon_credentials['Access key ID'],
+                                   ACCESS_KEY = amazon_credentials['Secret access key'])
 
     # adapt format for amazon ingestion
     tweets_dicts = texts_df.to_dict(orient='records')

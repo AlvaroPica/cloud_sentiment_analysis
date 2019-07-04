@@ -1,6 +1,3 @@
-urllib
-http
-json
 pandas
 boto3
 google-cloud

@@ -1,4 +1,4 @@
-#### Retrieve sentiment analysis from Azure Text Analysis API Tool ####
+#### Retrieve Results from the three clouds for comparison purposes ####
 
 import pandas as pd
 import os
@@ -22,11 +22,7 @@ if __name__ == '__main__':
                                        on='id',
                                        how='left')
 
-    sentiment_df['azure_sentiment'] = sentiment_df['azure_sentiment']\
-        .map(lambda x: round(float(x),2))
-    sentiment_df['google_sentiment'] = sentiment_df['google_sentiment']\
-        .map(lambda x: round(float(x),2))
-    sentiment_df['google_emotion'] =sentiment_df['google_emotion']\
-        .map(lambda x: round(float(x),2))
+    float_cols = sentiment_df.select_dtypes(include='float64').columns.tolist()
+    sentiment_df[float_cols] = sentiment_df[float_cols].apply(lambda x: round(x, 2))
 
-    fpath = os.path.join(cwd, "data//train.tsv//train.tsv")
+    print(sentiment_df)
