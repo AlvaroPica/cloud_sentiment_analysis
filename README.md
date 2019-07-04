@@ -1,14 +1,14 @@
 # cloud_sentiment_analysis
 
-This respositoy explains with code and examples how to run a text sentiment analysis on the three main cloud analytics providers and their differences. Small texts that could represent a tweet or a restaurante or movie reviews are analyzied con Amazon Web Services, Google Cloud Platform and Azure Portal. 
+This respositoy explains with code and examples how to run a text sentiment analysis on any of the three main cloud analytics services providers and their differences. Small texts that could represent a tweet, a restaurante opinion or a movie reviews are analyzed on Amazon Web Services, Google Cloud Platform and Azure Portal. 
 
-Each of the NLP Sentiment Analysis services provides a Score on the sentiment which ranges can vary according to the cloud provider:
+Each of the NLP Sentiment Analysis services provides a Score on the sentiment of the given text which ranges can vary according to the cloud provider:
 
 - AMAZON: Categorical Score with categories POSITIVE; NEUTRAL AND NEGATIVE
 - AZURE: Continous variable from 0 to 1, being 0 the most negative and 1 the most positve.
 - GOOLE: Continous variable from -1 to 1, being -1 the most negative and 1 the most positive.
 
-For each Cloud provider we will use REST API request to call the Sentiment Analys services. Valid credentials will be needed to communicate with the provider. An example of these credentials are provided in this repository but none of them are anymore more valid. Instructions for generating the own credentials will be given.
+For each Cloud provider we will use python frameworks to call the Sentiment Analys services. Valid credentials will be needed to communicate with the provider. An example of these credentials are provided in this repository but none of them are anymore more valid. Instructions for generating the own credentials will be given in corresponding notebook.
 
 The purpose of this reposity is merely educational with the intention of:
 
