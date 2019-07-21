@@ -3,8 +3,7 @@
 import pandas as pd
 import os
 
-if __name__ == '__main__':
-
+def analyze():
     # Load results dataset
     cwd = os.getcwd()
     texts_df = pd.read_csv(os.path.join(cwd, "data///texts_samples.csv"))
@@ -25,4 +24,9 @@ if __name__ == '__main__':
     float_cols = sentiment_df.select_dtypes(include='float64').columns.tolist()
     sentiment_df[float_cols] = sentiment_df[float_cols].apply(lambda x: round(x, 2))
 
-    print(sentiment_df)
+    return sentiment_df
+
+
+if __name__ == '__main__':
+    data = analyze()
+    print(data)

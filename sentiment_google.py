@@ -7,23 +7,7 @@ from google.cloud.language import enums
 from google.cloud.language import types
 
 
-def get_google_sentiment(tweet, client):
-    document = types.Document(
-        content=tweet,
-        language='es',
-        type=enums.Document.Type.PLAIN_TEXT)
-    tweet_analysis = client.analyze_sentiment(document=document)
-    emotion = round(tweet_analysis.document_sentiment.magnitude, 3)
-    sentiment = round(tweet_analysis.document_sentiment.score, 3)
-
-    return sentiment, emotion
-
-def google_rescale(x):
-        _min, _max = -1, 1
-        return (x - _min) / (_max - _min)
-
-if __name__ == '__main__':
-
+def execute_google():
     cwd = os.getcwd()
     texts_sample_fpath = os.path.join(cwd, 'data//texts_samples.csv')
     google_credentials_fpath = os.path.join(cwd, 'credentials//my_google_credentials.json')
@@ -58,5 +42,26 @@ if __name__ == '__main__':
     #Save google results
     results_df.to_csv(os.path.join(cwd, 'results//google_sentiment.csv'), index=False)
 
-    print(results_df)
+    return results_df
     # Delete your google cloud platform json credentials file from local and on the cloud. This was just for fun.
+
+
+def get_google_sentiment(tweet, client):
+    document = types.Document(
+        content=tweet,
+        language='es',
+        type=enums.Document.Type.PLAIN_TEXT)
+    tweet_analysis = client.analyze_sentiment(document=document)
+    emotion = round(tweet_analysis.document_sentiment.magnitude, 3)
+    sentiment = round(tweet_analysis.document_sentiment.score, 3)
+
+    return sentiment, emotion
+
+def google_rescale(x):
+        _min, _max = -1, 1
+        return (x - _min) / (_max - _min)
+
+
+if __name__ == '__main__':
+    results = execute_google()
+    print(results)

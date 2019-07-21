@@ -5,6 +5,36 @@ import json
 import pandas as pd
 import os
 
+
+def execute_azure():
+    cwd = os.getcwd()
+    texts_sample_fpath = os.path.join(cwd, 'data//texts_samples.csv')
+    azure_credentials_fpath = os.path.join(cwd, 'credentials//azure_key.txt')
+    texts_df = pd.read_csv(texts_sample_fpath)
+
+    #adapt to azure ingestion format
+    texts_list_raw = texts_df.to_dict(orient='records')
+    texts_list = {"documents": texts_list_raw}
+
+    #retrieve azure key from saved plain txt file
+    AZURE_KEY = retrieve_azure_key_from_save_place(azure_credentials_fpath)
+
+    #call azure through rest API and get sentiment score
+    sentiments = get_azure_sentiment(texts_list , AZURE_KEY)
+
+    #adapt response format and merge with original dataframe
+    sentiments_df = pd.DataFrame(sentiments['documents'])
+    sentiments_df['id'] = sentiments_df['id'].astype(int)
+    sentiments_df.rename(columns={'score':'azure_score'}, inplace=True)
+    results_df = pd.merge(texts_df, sentiments_df, on='id')
+
+    #save azure results
+    col_order = ['id', 'azure_score']
+    results_df[col_order].to_csv(os.path.join(cwd, 'results//azure_sentiment.csv'), index=False)
+
+    return results_df
+    #Delete your azure txt credentials files from local and on the cloud. This was just for fun.
+
 def get_azure_sentiment(texts_lists, AZURE_KEY):
     headers = {'Content-Type': 'application/json',
                'Ocp-Apim-Subscription-Key': f'{AZURE_KEY}'}
@@ -30,34 +60,7 @@ def retrieve_azure_key_from_save_place(fpath):
 
     return my_azure_key
 
+
 if __name__ == '__main__':
-
-    cwd = os.getcwd()
-    texts_sample_fpath = os.path.join(cwd, 'data//texts_samples.csv')
-    azure_credentials_fpath = os.path.join(cwd, 'credentials//azure_key.txt')
-    texts_df = pd.read_csv(texts_sample_fpath)
-
-    #adapt to azure ingestion format
-    texts_list_raw = texts_df.to_dict(orient='records')
-    texts_list = {"documents": texts_list_raw}
-
-    #retrieve azure key from saved plain txt file
-    AZURE_KEY = retrieve_azure_key_from_save_place(azure_credentials_fpath)
-
-    #call azure through rest API and get sentiment score
-    sentiments = get_azure_sentiment(texts_list , AZURE_KEY)
-
-    #adapt response format and merge with original dataframe
-    sentiments_df = pd.DataFrame(sentiments['documents'])
-    sentiments_df['id'] = sentiments_df['id'].astype(int)
-    sentiments_df.rename(columns={'score':'azure_score'}, inplace=True)
-    results_df = pd.merge(texts_df, sentiments_df, on='id')
-
-    #show azure results
-    print(results_df)
-
-    #save azure results
-    col_order = ['id', 'azure_score']
-    results_df[col_order].to_csv(os.path.join(cwd, 'results//azure_sentiment.csv'), index=False)
-
-    #Delete your azure txt credentials files from local and on the cloud. This was just for fun.
+    results = execute_azure()
+    print(results)
