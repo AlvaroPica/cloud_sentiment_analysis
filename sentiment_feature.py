@@ -1,30 +1,39 @@
-#### Retrieve Results from the three clouds for comparison purposes ####
-
 import pandas as pd
 import os
 
+FILE_PATHS = [
+    os.path.join("results","azure_sentiment.csv"),
+    os.path.join("results","google_sentiment.csv"),
+    os.path.join("results","amazon_sentiment.csv"),
+    os.path.join("data","texts_samples.csv"),
+]
+
+
 def analyze():
-    # Load results dataset
-    cwd = os.getcwd()
-    texts_df = pd.read_csv(os.path.join(cwd, "data///texts_samples.csv"))
-    azure_df = pd.read_csv(os.path.join(cwd, "results/azure_sentiment.csv"))
-    google_df = pd.read_csv(os.path.join(cwd, "results/google_sentiment.csv"))
-    amazon_df = pd.read_csv(os.path.join(cwd, "results/amazon_sentiment.csv"))
+    sentiment_df = load_data()
+    round_float_cols(sentiment_df)
+    return sentiment_df
 
-    sentiment_df = azure_df.merge(google_df,
-                                       on='id',
-                                       how='left')
-    sentiment_df = sentiment_df.merge(amazon_df,
-                                       on='id',
-                                       how='left')
-    sentiment_df = sentiment_df.merge(texts_df,
-                                       on='id',
-                                       how='left')
 
-    float_cols = sentiment_df.select_dtypes(include='float64').columns.tolist()
-    sentiment_df[float_cols] = sentiment_df[float_cols].apply(lambda x: round(x, 2))
+def load_data():
+    sentiment_df = None
+    for file_path in FILE_PATHS:
+        sentiment_df = read_and_merge_data(file_path, sentiment_df)
 
     return sentiment_df
+
+
+def read_and_merge_data(file_path, df = None):
+    data_df = pd.read_csv(file_path)
+    if df is None:
+        return data_df
+
+    return df.merge(data_df, on='id', how='left')
+
+
+def round_float_cols(df):
+    float_cols = df.select_dtypes(include='float64').columns.tolist()
+    df[float_cols] = df[float_cols].apply(lambda x: round(x, 2))
 
 
 if __name__ == '__main__':
