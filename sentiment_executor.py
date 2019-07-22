@@ -14,6 +14,7 @@ def execute_cloud_sentiment(
     texts_list_raw = texts_df.to_dict(orient='records')
 
     cloud_data = get_cloud_data(texts_list_raw)
+    # TODO pandas not needed
     results_df = cc.pandas_df_to_dict (cloud_data)
     log_data(results_df, sentiment_field)
 
