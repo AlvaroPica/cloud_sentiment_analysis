@@ -1,11 +1,10 @@
-import pandas as pd
-import os
+import crosscutting as cc
 
 FILE_PATHS = [
-    os.path.join("results","azure_sentiment.csv"),
-    os.path.join("results","google_sentiment.csv"),
-    os.path.join("results","amazon_sentiment.csv"),
-    os.path.join("data","texts_samples.csv"),
+    cc.pathjoin("results","azure_sentiment.csv"),
+    cc.pathjoin("results","google_sentiment.csv"),
+    cc.pathjoin("results","amazon_sentiment.csv"),
+    cc.pathjoin("data","texts_samples.csv"),
 ]
 
 
@@ -24,7 +23,7 @@ def load_data():
 
 
 def read_and_merge_data(file_path, df = None):
-    data_df = pd.read_csv(file_path)
+    data_df = cc.pandas_read_csv(file_path)
     if df is None:
         return data_df
 
