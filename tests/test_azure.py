@@ -23,7 +23,7 @@ def test_execute_azure():
     with open(expected_request_data_path) as json_file:
         expected_request_data = json_file.read()
         
-    expected = pd.read_csv(os.path.join("tests", "test_azure_sentiment_expected.csv"))
+    expected = pd.read_csv(os.path.join('tests', 'test_azure_sentiment_expected.csv'))
 
     # act
     result = sentiment_azure.execute_azure()

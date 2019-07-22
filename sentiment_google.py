@@ -10,8 +10,8 @@ def execute_google():
     return execute_cloud_sentiment(
         'google_sentiment.csv',
         get_google_data,
-        sentiment_field="google_score",
-        column_order=["google_emotion", "google_score", "id", "google_scaled"]
+        sentiment_field='google_score',
+        column_order=['google_emotion', 'google_score', 'id', 'google_scaled']
     )
 
 
@@ -34,17 +34,17 @@ def get_google_item_data(gcp_client, tweet_dict):
     sentiment = round(tweet_analysis.document_sentiment.score, 3)
     
     return {
-        "id": tweet_dict['id'],
-        "google_score": sentiment,
-        "google_emotion": emotion,
+        'id': tweet_dict['id'],
+        'google_score': sentiment,
+        'google_emotion': emotion,
         #add google score rescaled to same range than azure score for comparison
-        "google_scaled": google_rescale(sentiment),
+        'google_scaled': google_rescale(sentiment),
     }
 
 
 def get_google_client():
     google_credentials_fpath = cc.pathjoin('credentials', 'my_google_credentials.json')
-    cc.set_environ("GOOGLE_APPLICATION_CREDENTIALS", google_credentials_fpath)
+    cc.set_environ('GOOGLE_APPLICATION_CREDENTIALS', google_credentials_fpath)
     # Delete your google cloud platform json credentials file from local and on the cloud. This was just for fun.
     return language.LanguageServiceClient()
 

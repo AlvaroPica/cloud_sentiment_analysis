@@ -32,7 +32,7 @@ def test_execute_google():
     tweet_analysis_mocks = list(map(get_tweet_analysis_mock, magnitudes_and_scores))
     language_svc_client_mock.analyze_sentiment.side_effect = tweet_analysis_mocks
         
-    expected = pd.read_csv(os.path.join("tests", "test_google_sentiment_expected.csv"))
+    expected = pd.read_csv(os.path.join('tests', 'test_google_sentiment_expected.csv'))
 
     # act
     result = sentiment_google.execute_google()

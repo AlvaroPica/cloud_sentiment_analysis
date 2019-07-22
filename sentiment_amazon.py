@@ -8,7 +8,7 @@ def execute_amazon():
     return execute_cloud_sentiment(
         'amazon_sentiment.csv',
         get_amazon_data,
-        sentiment_field="aws_sentiment",
+        sentiment_field='aws_sentiment',
     )
 
 
@@ -25,12 +25,12 @@ def get_amazon_item_data(aws_client, tweet_dict):
     sentiment_score = aws_response['SentimentScore']
 
     return {
-        "id": tweet_dict['id'],
-        "aws_sentiment": aws_response['Sentiment'],
-        "aws_positive": sentiment_score['Positive'],
-        "aws_negative": sentiment_score['Negative'],
-        "aws_neutral": sentiment_score['Neutral'],
-        "aws_mixed": sentiment_score['Mixed']
+        'id': tweet_dict['id'],
+        'aws_sentiment': aws_response['Sentiment'],
+        'aws_positive': sentiment_score['Positive'],
+        'aws_negative': sentiment_score['Negative'],
+        'aws_neutral': sentiment_score['Neutral'],
+        'aws_mixed': sentiment_score['Mixed']
     }
 
 

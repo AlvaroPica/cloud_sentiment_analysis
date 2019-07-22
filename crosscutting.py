@@ -18,7 +18,7 @@ def set_environ(env_name, env_value):
     
 
 def open_read_file(file_path):
-    return open(file_path, "r")
+    return open(file_path, 'r')
 
 
 def read_file(file_path):
@@ -44,6 +44,6 @@ def http_request(server_url, action, path, request_data, headers):
         conn.close()
 
     except Exception as e:
-        print("[Errno {0}] {1}".format(e.errno, e.strerror))
+        print('[Errno {0}] {1}'.format(e.errno, e.strerror))
 
     return response_data

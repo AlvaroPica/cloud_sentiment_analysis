@@ -8,7 +8,7 @@ from sentiment_merge import merge
 # TODO because file write is not mocked, this test must be executed last
 def test_merge():
     # arrange
-    expected = pd.read_csv(os.path.join("tests", "test_merge.csv"))
+    expected = pd.read_csv(os.path.join('tests', 'test_merge.csv'))
 
     # act
     result = merge()

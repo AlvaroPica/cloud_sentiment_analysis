@@ -1,10 +1,10 @@
 import crosscutting as cc
 
 FILE_PATHS = [
-    cc.pathjoin("results","azure_sentiment.csv"),
-    cc.pathjoin("results","google_sentiment.csv"),
-    cc.pathjoin("results","amazon_sentiment.csv"),
-    cc.pathjoin("data","texts_samples.csv"),
+    cc.pathjoin('results','azure_sentiment.csv'),
+    cc.pathjoin('results','google_sentiment.csv'),
+    cc.pathjoin('results','amazon_sentiment.csv'),
+    cc.pathjoin('data','texts_samples.csv'),
 ]
 
 

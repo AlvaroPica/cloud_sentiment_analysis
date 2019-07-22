@@ -31,4 +31,4 @@ def execute_cloud_sentiment(
 def log_data(results_df, sentiment_field):
     total_items = results_df.shape[1]
     for idx, item_data in results_df.iterrows():
-        print(f"Sentiment {item_data[sentiment_field]} for {idx+1} / {total_items}")
+        print(f'Sentiment {item_data[sentiment_field]} for {idx+1} / {total_items}')
