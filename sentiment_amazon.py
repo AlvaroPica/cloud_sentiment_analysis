@@ -1,12 +1,15 @@
 import boto3
 
+import config
 import crosscutting as cc
 from sentiment_executor import execute_cloud_sentiment
+
+amazon_filename = 'amazon_sentiment.csv'
 
 
 def execute_amazon():
     return execute_cloud_sentiment(
-        'amazon_sentiment.csv',
+        amazon_filename,
         get_amazon_data,
         sentiment_field='aws_sentiment',
     )
@@ -35,7 +38,7 @@ def get_amazon_item_data(aws_client, tweet_dict):
 
 
 def get_amazon_client():
-    amazon_credentials_fpath = cc.pathjoin('credentials', 'my_amazon_credentials.csv')
+    amazon_credentials_fpath = cc.pathjoin(config.credentials_path, 'my_amazon_credentials.csv')
     amazon_credentials = cc.csv_load(amazon_credentials_fpath)[0]
     # Delete your amazon credentials, from local and on the cloud. This was just for fun.
 

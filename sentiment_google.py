@@ -2,13 +2,16 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
+import config
 import crosscutting as cc
 from sentiment_executor import execute_cloud_sentiment
+
+google_filename = 'google_sentiment.csv'
 
 
 def execute_google():
     return execute_cloud_sentiment(
-        'google_sentiment.csv',
+        google_filename,
         get_google_data,
         sentiment_field='google_score',
         column_order=['google_emotion', 'google_score', 'id', 'google_scaled']
@@ -43,7 +46,7 @@ def get_google_item_data(gcp_client, tweet_dict):
 
 
 def get_google_client():
-    google_credentials_fpath = cc.pathjoin('credentials', 'my_google_credentials.json')
+    google_credentials_fpath = cc.pathjoin(config.credentials_path, 'my_google_credentials.json')
     cc.set_environ('GOOGLE_APPLICATION_CREDENTIALS', google_credentials_fpath)
     # Delete your google cloud platform json credentials file from local and on the cloud. This was just for fun.
     return language.LanguageServiceClient()

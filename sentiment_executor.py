@@ -1,14 +1,15 @@
+import config
 import crosscutting as cc
 
 
 def execute_cloud_sentiment(
-    output_file_name,
+    output_filename,
     get_cloud_data,
     sentiment_field,
     cols_to_save=None,
     column_order=None
 ):
-    input_file_path = cc.pathjoin('data', 'texts_samples.csv')
+    input_file_path = cc.pathjoin(config.data_path, config.input_filename)
 
     texts_df = cc.pandas_read_csv(input_file_path)
     texts_list_raw = texts_df.to_dict(orient='records')
@@ -22,7 +23,7 @@ def execute_cloud_sentiment(
         results_df = results_df[column_order]
 
     df_to_save = results_df if not cols_to_save else results_df[cols_to_save]
-    output_file_path = cc.pathjoin('results', output_file_name)
+    output_file_path = cc.pathjoin(config.results_path, output_filename)
     df_to_save.to_csv(output_file_path, index=False)
 
     return results_df

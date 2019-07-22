@@ -1,10 +1,13 @@
+import config
 import crosscutting as cc
 from sentiment_executor import execute_cloud_sentiment
+
+azure_filename = 'azure_sentiment.csv'
 
 
 def execute_azure():
     return execute_cloud_sentiment(
-        'azure_sentiment.csv',
+        azure_filename,
         get_azure_data,
         sentiment_field='azure_score',
         cols_to_save=['id','azure_score'],
@@ -13,7 +16,7 @@ def execute_azure():
 
 
 def get_azure_data(texts_list_raw):
-    azure_key = cc.read_file(cc.pathjoin('credentials', 'azure_key.txt'))
+    azure_key = cc.read_file(cc.pathjoin(config.credentials_path, 'azure_key.txt'))
     raw_data = get_azure_sentiment(texts_list_raw, azure_key)
     return map_azure_raw_data(raw_data, texts_list_raw)
 

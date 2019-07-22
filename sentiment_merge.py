@@ -1,10 +1,14 @@
+import config
 import crosscutting as cc
+from sentiment_amazon import amazon_filename
+from sentiment_azure import azure_filename
+from sentiment_google import google_filename
 
 FILE_PATHS = [
-    cc.pathjoin('results','azure_sentiment.csv'),
-    cc.pathjoin('results','google_sentiment.csv'),
-    cc.pathjoin('results','amazon_sentiment.csv'),
-    cc.pathjoin('data','texts_samples.csv'),
+    cc.pathjoin(config.results_path, azure_filename),
+    cc.pathjoin(config.results_path, google_filename),
+    cc.pathjoin(config.results_path, amazon_filename),
+    cc.pathjoin(config.data_path, config.input_filename),
 ]
 
 
