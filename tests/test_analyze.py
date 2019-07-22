@@ -5,6 +5,7 @@ import os.path
 from sentiment_feature import analyze
 
 
+# TODO because file write is not mocked, this test must be executed last
 def test_analyze():
     # arrange
     expected = pd.read_csv(os.path.join("tests", "test_analize.csv"))
