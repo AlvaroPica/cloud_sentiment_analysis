@@ -2,19 +2,19 @@ import sys
 
 from sentiment_amazon import execute_amazon
 from sentiment_azure import execute_azure
-from sentiment_feature import analyze
+from sentiment_merge import merge
 from sentiment_google import execute_google
 
 amazon_arg = '--amazon'
 azure_arg = '--azure'
 google_arg = '--google'
-feature_arg = '--feature'
+merge_arg = '--merge'
 all_arg = '--all'
 
 execute_by_arg = {
     amazon_arg: execute_amazon,
     azure_arg: execute_azure,
-    feature_arg: analyze,
+    merge_arg: merge,
     google_arg: execute_google,
 }
 
