@@ -1,6 +1,14 @@
 # Text sentiment analysis on the Cloud
 
-This respositoy explains with code and examples how to run a text sentiment analysis on any of the three main cloud analytics services providers and their differences. Small texts that could represent a tweet, a restaurante opinion or a movie reviews are analyzed on Amazon Web Services, Google Cloud Platform and Azure Portal. 
+This respositoy explains with code and examples how to run a text sentiment analysis on any of the three main cloud analytics services providers and their differences. Small texts that could represent a tweet, a restaurante opinion or a movie reviews are analyzed on Amazon Web Services, Google Cloud Platform and Azure Portal.
+
+Run:
+
+    > python run.py --amazon
+    > python run.py --azure
+    > python run.py --google
+    > python run.py --merge
+    > python run.py --all
 
 Each of the NLP Sentiment Analysis services provides a Score on the sentiment of the given text which ranges can vary according to the cloud provider:
 
